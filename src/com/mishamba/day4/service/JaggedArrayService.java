@@ -2,7 +2,7 @@ package com.mishamba.day4.service;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ArrayService {
+public class JaggedArrayService {
     public int[][] sort(int[] @NotNull [] array, Comparator larger) {
         for (int i = 0; i < array.length;i++ ) {
             for (int j = i+1;j<array.length;j++) {
