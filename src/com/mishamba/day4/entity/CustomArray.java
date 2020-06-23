@@ -2,17 +2,8 @@ package com.mishamba.day4.entity;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.stream.Stream;
-
 public class CustomArray {
-    private int[] array;
+    private final int[] array;
 
     public CustomArray(@NotNull CustomArray sourceArray) {
         this.array = new int[sourceArray.getLength()];
