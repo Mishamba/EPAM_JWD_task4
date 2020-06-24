@@ -29,8 +29,8 @@ public class CustomArray {
 
     public CustomArray getPartOfArray(int left, int right) {
         int[] newArray = new int[right - left + 1];
-        for (int i = 0; i < right - left + 1; i++) {
-            newArray[i] = array[i];
+        for (int i = left; i < right + 1; i++) {
+            newArray[i - left] = array[i];
         }
 
         return new CustomArray(newArray);
@@ -38,7 +38,7 @@ public class CustomArray {
 
     public boolean isSorted() {
         try {
-            for (int i = 0; i < array.length; i++) {
+            for (int i = 0; i < array.length - 1; i++) {
                 if (array[i] > array[i + 1]) {
                     return false;
                 }

@@ -1,0 +1,5 @@
+class Main {
+    public static void main(String[] args) {
+        System.out.println("this must be file with numbers, but there is a java code...");
+    }
+}

@@ -19,8 +19,10 @@ public class CustomArrayFindService {
                 return mid;
             } else if (array.getByIndex(mid) > elem) {
                 right = mid;
+                mid = (right + left) / 2;
             } else {
                 left = mid;
+                mid = (right + left) / 2;
             }
         }
 
@@ -43,9 +45,16 @@ public class CustomArrayFindService {
     }
 
     private boolean prime(int elem) {
-        double mark = 0;
-        for (int j = elem; j > 0; j--) {
-            mark += ((double) elem) / j;
+        if (elem < 0) {
+            return false;
+        }
+
+        int mark = 0;
+        for (int j = elem - 1; j > 1; j--) {
+            double tmp = ((double) elem)/j;
+            if (tmp == (int) tmp) {
+                mark++;
+            }
         }
 
         return (mark == 0);

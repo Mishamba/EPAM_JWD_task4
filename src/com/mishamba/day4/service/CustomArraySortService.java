@@ -5,8 +5,10 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class CustomArraySortService {
-    public void sortByQuicksort(CustomArray array) {
-        intervalQuicksort(0, array.getLength() - 1, array);
+    public CustomArray sortByQuicksort(CustomArray array) {
+        CustomArray customArray = new CustomArray(array);
+        intervalQuicksort(0, array.getLength() - 1, customArray);
+        return customArray;
     }
 
     private void intervalQuicksort(int left, int right, CustomArray array) {
@@ -43,9 +45,9 @@ public class CustomArraySortService {
 
         int middle = givenArray.getLength() / 2;
 
-        CustomArray leftArray = givenArray.getPartOfArray(0, middle);
-        CustomArray rightArray = givenArray.getPartOfArray(middle +1,
-                givenArray.getLength());
+        CustomArray leftArray = givenArray.getPartOfArray(0, middle - 1);
+        CustomArray rightArray = givenArray.getPartOfArray(middle,
+                givenArray.getLength() - 1);
 
         sort(leftArray);
         sort(rightArray);
@@ -84,7 +86,9 @@ public class CustomArraySortService {
             int j = i - 1;
 
             while (j >= 0 && key < array.getByIndex(j)) {
+                int tmp = array.getByIndex(j);
                 array.setElementByIndex(array.getByIndex(j + 1), j);
+                array.setElementByIndex(tmp, j + 1);
                 j--;
             }
 

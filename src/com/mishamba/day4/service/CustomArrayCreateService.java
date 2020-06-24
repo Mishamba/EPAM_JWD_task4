@@ -26,15 +26,21 @@ public class CustomArrayCreateService {
         return new CustomArray(array);
     }
 
-    public CustomArray customArrayByFile(Path path) throws IOException {
-        int[] array = getArrayFromFile(path);
-        return new CustomArray(array);
+    public CustomArray customArrayByFile(Path path) throws ProgramException {
+        try {
+            int[] array = getArrayFromFile(path);
+            return new CustomArray(array);
+        } catch (IOException ex) {
+            throw new ProgramException("reading from file error");
+        } catch (NumberFormatException ex) {
+            throw new ProgramException("not a number in file");
+        }
     }
 
-    private int[] getArrayFromFile(Path path) throws IOException {
-        int[] fileArray = null;
+    private int[] getArrayFromFile(Path path)
+            throws IOException, NumberFormatException {
         Stream<String> lines = Files.lines(path);
-        fileArray = lines.mapToInt(Integer::parseInt).toArray();
+        int[] fileArray = lines.mapToInt(Integer::parseInt).toArray();
         lines.close();
 
         return fileArray;
