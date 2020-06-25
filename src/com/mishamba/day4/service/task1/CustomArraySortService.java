@@ -1,4 +1,4 @@
-package com.mishamba.day4.service;
+package com.mishamba.day4.service.task1;
 
 import com.mishamba.day4.entity.CustomArray;
 import org.jetbrains.annotations.Contract;

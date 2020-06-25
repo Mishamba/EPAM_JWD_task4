@@ -1,8 +1,8 @@
-package mishamba.day4.service;
+package mishamba.day4.service.task1;
 
 import com.mishamba.day4.entity.CustomArray;
 import com.mishamba.day4.exception.ProgramException;
-import com.mishamba.day4.service.CustomArrayFindService;
+import com.mishamba.day4.service.task1.CustomArrayFindService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.testng.annotations.DataProvider;
