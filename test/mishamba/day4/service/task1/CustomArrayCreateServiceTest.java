@@ -17,7 +17,7 @@ public class CustomArrayCreateServiceTest {
 
     @Contract(" -> new")
     @DataProvider(name = "existing correct files")
-    private Object[] @NotNull [] validFiles() {
+    private Object[] @NotNull [] validFiles() throws ProgramException {
         return new Object[][] {
                 {Paths.get("valid_data/testSource1"),
                         new CustomArray(new int[] {4, 2, 5, 8, 4, 2, 6, 0, 5})},

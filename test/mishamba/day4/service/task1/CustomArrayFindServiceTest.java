@@ -24,7 +24,12 @@ public class CustomArrayFindServiceTest {
 
     @Test(dataProvider = "random array")
     public void findElementIndex_valid(int[] sourceArray, int expectedIndex) {
-        CustomArray array = new CustomArray(sourceArray);
+        CustomArray array = null;
+        try {
+            array = new CustomArray(sourceArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
         CustomArrayFindService service = new CustomArrayFindService();
         try {
             int actualIndex = service.findElemIndex(sourceArray[expectedIndex],
@@ -66,7 +71,12 @@ public class CustomArrayFindServiceTest {
 
     @Test(dataProvider = "array with prime numbers")
     public void findPrimeNumbers(int[] sourceArray, int[] primeArray) {
-        CustomArray array = new CustomArray(sourceArray);
+        CustomArray array = null;
+        try {
+            array = new CustomArray(sourceArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
         CustomArrayFindService service = new CustomArrayFindService();
         try {
             int[] actualArray = service.findPrimeNumbers(array);
@@ -89,7 +99,12 @@ public class CustomArrayFindServiceTest {
 
     @Test(dataProvider = "array with fibonacci numbers")
     public void findFibonacciNumbers(int[] sourceArray, int[] fibonacciArray) {
-        CustomArray array = new CustomArray(sourceArray);
+        CustomArray array = null;
+        try {
+            array = new CustomArray(sourceArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
         CustomArrayFindService service = new CustomArrayFindService();
         try {
             int[] actualArray = service.findFibonacciNumbers(array);
@@ -117,7 +132,12 @@ public class CustomArrayFindServiceTest {
     @Test(dataProvider = "array with strange numbers")
     public void findNumbersWithNoSameLetters(int[] sourceArray,
                                                  int[] strangeArray) {
-        CustomArray array = new CustomArray(sourceArray);
+        CustomArray array = null;
+        try {
+            array = new CustomArray(sourceArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
         CustomArrayFindService service = new CustomArrayFindService();
         try {
             int[] actualArray = service.findNumbersWithNoSameLetters(array);

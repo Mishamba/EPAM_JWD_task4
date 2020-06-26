@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class CustomArrayCreateService {
-    public CustomArray customArrayByConsole() {
+    public CustomArray customArrayByConsole() throws ProgramException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("enter new array length");
         int newLength = scanner.nextInt();

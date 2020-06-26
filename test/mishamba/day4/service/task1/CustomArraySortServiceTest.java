@@ -23,15 +23,19 @@ public class CustomArraySortServiceTest {
         };
     }
 
-    @Test(dataProvider = "arraysToSort", priority = 3)
+    @Test(dataProvider = "arraysToSort")
     public void sortByQuicksort(CustomArray arrayToSort,
                                     CustomArray providedSortedArray) {
         CustomArraySortService service = new CustomArraySortService();
-        CustomArray sortedArray = service.sortByQuicksort(arrayToSort);
-        assertEquals(sortedArray, providedSortedArray);
+        try {
+            CustomArray sortedArray = service.sortByQuicksort(arrayToSort);
+            assertEquals(sortedArray, providedSortedArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 
-    @Test(dataProvider = "arraysToSort", priority = 2)
+    @Test(dataProvider = "arraysToSort")
     public void sortByMergeSort(CustomArray arrayToSort,
                                 CustomArray providedSortedArray)
             throws ProgramException {
@@ -41,11 +45,15 @@ public class CustomArraySortServiceTest {
         assertEquals(sortedArray, providedSortedArray);
     }
 
-    @Test(dataProvider = "arraysToSort", priority = 1)
+    @Test(dataProvider = "arraysToSort")
     public void sortByInsert(CustomArray arrayToSort,
                                  CustomArray providedSortedArray) {
         CustomArraySortService service = new CustomArraySortService();
-        CustomArray sortedArray = service.sortByInsert(arrayToSort);
-        assertEquals(sortedArray, providedSortedArray);
+        try {
+            CustomArray sortedArray = service.sortByInsert(arrayToSort);
+            assertEquals(sortedArray, providedSortedArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 }

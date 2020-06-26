@@ -4,7 +4,7 @@ import com.mishamba.day4.entity.CustomArray;
 import com.mishamba.day4.exception.ProgramException;
 
 public class CustomArraySortService {
-    public CustomArray sortByQuicksort(CustomArray array) {
+    public CustomArray sortByQuicksort(CustomArray array) throws ProgramException {
         CustomArray customArray = new CustomArray(array);
         intervalQuicksort(0, array.getLength() - 1, customArray);
         return customArray;
@@ -55,9 +55,6 @@ public class CustomArraySortService {
     }
 
     private CustomArray sort(CustomArray givenArray) throws ProgramException {
-        if (givenArray == null) {
-            throw new ProgramException("given array is null");
-        }
         if (givenArray.getLength() == 1) {
             return givenArray;
         }
@@ -68,23 +65,24 @@ public class CustomArraySortService {
         CustomArray rightArray = givenArray.getPartOfArray(middle,
                 givenArray.getLength() - 1);
 
-        sort(leftArray);
-        sort(rightArray);
+        leftArray = sort(leftArray);
+        rightArray = sort(rightArray);
 
         return merge(leftArray, rightArray);
     }
 
     private CustomArray merge(CustomArray leftArray,
-                              CustomArray rightArray) {
+                              CustomArray rightArray) throws ProgramException {
         int[] mergedArray = new int[leftArray.getLength() +
                 rightArray.getLength()];
         int positionLeft = 0;
         int positionRight = 0;
 
         for (int i = 0; i < mergedArray.length; i++) {
-            if ((positionRight == rightArray.getLength()) ||
-                    (leftArray.getByIndex(positionLeft) <
-                            rightArray.getByIndex(positionRight))) {
+            if (positionRight == rightArray.getLength() ||
+                    secureElementsCompare(
+                            positionLeft, leftArray,
+                            positionRight, rightArray)) {
                 mergedArray[i] = leftArray.getByIndex(positionLeft);
                 positionLeft++;
             } else {
@@ -96,7 +94,19 @@ public class CustomArraySortService {
         return new CustomArray(mergedArray);
     }
 
-    public CustomArray sortByInsert(CustomArray inputArray) {
+    private boolean secureElementsCompare(int leftIndex, CustomArray leftArray,
+                                          int rightIndex, CustomArray rightArray) {
+        boolean less = false;
+        if ((leftArray.getLength() > leftIndex) &&
+                (rightArray.getLength() > rightIndex)) {
+            less = (leftArray.getByIndex(leftIndex) <
+                    rightArray.getByIndex(rightIndex));
+        }
+
+        return less;
+    }
+
+    public CustomArray sortByInsert(CustomArray inputArray) throws ProgramException {
         CustomArray array = new CustomArray(inputArray);
         int key;
         for (int i = 1; i < array.getLength(); i++) {
