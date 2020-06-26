@@ -21,12 +21,12 @@ public class CustomArraySortService {
 
         int mid = (right + left) / 2;
 
-        do {
-            while(array.getByIndex(i) < array.getByIndex(mid)) {
+        while (i <= j) {
+            while (array.getByIndex(i) < array.getByIndex(mid)) {
                 i++;
             }
 
-            while(array.getByIndex(j) > array.getByIndex(mid)) {
+            while (array.getByIndex(j) > array.getByIndex(mid)) {
                 j--;
             }
 
@@ -37,7 +37,9 @@ public class CustomArraySortService {
                 i++;
                 j--;
             }
-        } while (i <= j);
+        }
+
+        mid = (i + j) / 2;
 
         if (left < j) {
             intervalQuicksort(mid + 1, right, array);
@@ -73,7 +75,7 @@ public class CustomArraySortService {
     }
 
     private CustomArray merge(CustomArray leftArray,
-                                       CustomArray rightArray) {
+                              CustomArray rightArray) {
         int[] mergedArray = new int[leftArray.getLength() +
                 rightArray.getLength()];
         int positionLeft = 0;
