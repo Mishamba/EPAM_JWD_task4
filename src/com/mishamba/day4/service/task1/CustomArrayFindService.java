@@ -2,11 +2,13 @@ package com.mishamba.day4.service.task1;
 
 import com.mishamba.day4.entity.CustomArray;
 import com.mishamba.day4.exception.ProgramException;
-import org.jetbrains.annotations.NotNull;
 
 public class CustomArrayFindService {
-    public int findElemIndex(int elem, @NotNull CustomArray array)
+    public int findElemIndex(int elem, CustomArray array)
             throws ProgramException {
+        if (array == null) {
+            throw new ProgramException("array is null!!!");
+        }
         if (!array.isSorted()) {
             throw new ProgramException("sort array before find elem");
         }
@@ -29,17 +31,20 @@ public class CustomArrayFindService {
         throw new ProgramException("no such elem");
     }
 
-    public int[] findPrimeNumbers(CustomArray array) {
+    public int[] findPrimeNumbers(CustomArray array)
+            throws ProgramException {
         Reporter prime = this::prime;
         return findElements(prime, array);
     }
 
-    public int[] findFibonacciNumbers(CustomArray array) {
+    public int[] findFibonacciNumbers(CustomArray array)
+            throws ProgramException {
         Reporter fibonacci = this::fibonacci;
         return findElements(fibonacci, array);
     }
 
-    public int[] findNumbersWithNoSameLetters(CustomArray array) {
+    public int[] findNumbersWithNoSameLetters(CustomArray array)
+            throws ProgramException {
         Reporter noSameLetters = this::noSameLetters;
         return findElements(noSameLetters, array);
     }
@@ -83,8 +88,11 @@ public class CustomArrayFindService {
         return (ten == century) && (unity == century);
     }
 
-    private int @NotNull [] findElements(Reporter func,
-                                         @NotNull CustomArray array) {
+    private int [] findElements(Reporter func,
+                                         CustomArray array) throws ProgramException {
+        if (array == null) {
+            throw new ProgramException("array is null!!!");
+        }
         int quantity = 0;
         for (int i = 0; i< array.getLength();i++) {
             quantity += (func.appear(array.getByIndex(i))) ? 1 : 0;

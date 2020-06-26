@@ -1,8 +1,7 @@
 package com.mishamba.day4.service.task1;
 
 import com.mishamba.day4.entity.CustomArray;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import com.mishamba.day4.exception.ProgramException;
 
 public class CustomArraySortService {
     public CustomArray sortByQuicksort(CustomArray array) {
@@ -13,32 +12,50 @@ public class CustomArraySortService {
 
     private void intervalQuicksort(int left, int right, CustomArray array) {
         int tmp;
+        int i = left;
+        int j = right;
 
         if (left > right) {
             return;
         }
 
-        while (left < right) {
-            if (array.getByIndex(left) > array.getByIndex(right)) {
-                tmp = array.getByIndex(left);
-                array.setElementByIndex(array.getByIndex(right), left);
-                array.setElementByIndex(tmp, right);
+        int mid = (right + left) / 2;
+
+        do {
+            while(array.getByIndex(i) < array.getByIndex(mid)) {
+                i++;
             }
 
-            left++;
-        }
+            while(array.getByIndex(j) > array.getByIndex(mid)) {
+                j--;
+            }
 
-        int middle = (left + right) / 2;
-        intervalQuicksort(middle, right, array);
-        intervalQuicksort(left, middle, array);
+            if (i <= j) {
+                tmp = array.getByIndex(i);
+                array.setElementByIndex(array.getByIndex(j), i);
+                array.setElementByIndex(tmp, j);
+                i++;
+                j--;
+            }
+        } while (i <= j);
+
+        if (left < j) {
+            intervalQuicksort(mid + 1, right, array);
+        }
+        if (right > i) {
+            intervalQuicksort(left, mid, array);
+        }
     }
 
-    public CustomArray sortByMergeSort(CustomArray array) {
+    public CustomArray sortByMergeSort(CustomArray array) throws ProgramException {
         CustomArray sortedArray = new CustomArray(array);
         return sort(sortedArray);
     }
 
-    private @NotNull CustomArray sort(@NotNull CustomArray givenArray) {
+    private CustomArray sort(CustomArray givenArray) throws ProgramException {
+        if (givenArray == null) {
+            throw new ProgramException("given array is null");
+        }
         if (givenArray.getLength() == 1) {
             return givenArray;
         }
@@ -55,9 +72,8 @@ public class CustomArraySortService {
         return merge(leftArray, rightArray);
     }
 
-    @Contract("_, _ -> new")
-    private @NotNull CustomArray merge(@NotNull CustomArray leftArray,
-                                       @NotNull CustomArray rightArray) {
+    private CustomArray merge(CustomArray leftArray,
+                                       CustomArray rightArray) {
         int[] mergedArray = new int[leftArray.getLength() +
                 rightArray.getLength()];
         int positionLeft = 0;

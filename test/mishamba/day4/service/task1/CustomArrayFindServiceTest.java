@@ -68,8 +68,12 @@ public class CustomArrayFindServiceTest {
     public void findPrimeNumbers(int[] sourceArray, int[] primeArray) {
         CustomArray array = new CustomArray(sourceArray);
         CustomArrayFindService service = new CustomArrayFindService();
-        int[] actualArray = service.findPrimeNumbers(array);
-        assertEquals(actualArray, primeArray);
+        try {
+            int[] actualArray = service.findPrimeNumbers(array);
+            assertEquals(actualArray, primeArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 
     @Contract(value = " -> new", pure = true)
@@ -87,8 +91,12 @@ public class CustomArrayFindServiceTest {
     public void findFibonacciNumbers(int[] sourceArray, int[] fibonacciArray) {
         CustomArray array = new CustomArray(sourceArray);
         CustomArrayFindService service = new CustomArrayFindService();
-        int[] actualArray = service.findFibonacciNumbers(array);
-        assertEquals(actualArray, fibonacciArray);
+        try {
+            int[] actualArray = service.findFibonacciNumbers(array);
+            assertEquals(actualArray, fibonacciArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 
     // This dataprovider named as arraywith strange numbers because
@@ -111,7 +119,11 @@ public class CustomArrayFindServiceTest {
                                                  int[] strangeArray) {
         CustomArray array = new CustomArray(sourceArray);
         CustomArrayFindService service = new CustomArrayFindService();
-        int[] actualArray = service.findNumbersWithNoSameLetters(array);
-        assertEquals(actualArray, strangeArray);
+        try {
+            int[] actualArray = service.findNumbersWithNoSameLetters(array);
+            assertEquals(actualArray, strangeArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 }
