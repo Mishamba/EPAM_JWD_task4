@@ -1,18 +1,24 @@
 package com.mishamba.day4.entity;
 
-import org.jetbrains.annotations.NotNull;
+import com.mishamba.day4.exception.ProgramException;
 
 public class CustomArray {
     private final int[] array;
 
-    public CustomArray(@NotNull CustomArray sourceArray) {
+    public CustomArray(CustomArray sourceArray) throws ProgramException {
+        if (sourceArray == null) {
+            throw new ProgramException("i've got null array.");
+        }
         this.array = new int[sourceArray.getLength()];
         for (int i = 0; i < sourceArray.getLength(); i++) {
             this.array[i] = sourceArray.getByIndex(i);
         }
     }
 
-    public CustomArray(int @NotNull [] array) {
+    public CustomArray(int [] array) throws ProgramException {
+        if (array == null) {
+            throw new ProgramException("i've got null array.");
+        }
         this.array = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             this.array[i] = array[i];
@@ -27,7 +33,7 @@ public class CustomArray {
         return array.length;
     }
 
-    public CustomArray getPartOfArray(int left, int right) {
+    public CustomArray getPartOfArray(int left, int right) throws ProgramException {
         int[] newArray = new int[right - left + 1];
         for (int i = left; i < right + 1; i++) {
             newArray[i - left] = array[i];
@@ -37,27 +43,21 @@ public class CustomArray {
     }
 
     public boolean isSorted() {
-        try {
-            for (int i = 0; i < array.length - 1; i++) {
-                if (array[i] > array[i + 1]) {
-                    return false;
-                }
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                return false;
             }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
-            //we catch this exception if we tried to compare element
-            // with index > array.length.
         }
 
         return true;
     }
 
-    public boolean setElementByIndex(int data, int index) {
+    public void setElementByIndex(int data, int index) {
         if ((index < 0) || (index >= array.length)) {
-            return false;
+            return;
         }
 
         array[index] = data;
-        return true;
     }
 
     @Override
