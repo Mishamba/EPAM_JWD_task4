@@ -21,7 +21,7 @@ public class JaggedArrayService {
     }
 
     private boolean compare(int[] firstArray, int[] secondArray,
-                            Marker expression) {
+                            Marker expression) throws ProgramException {
         int firstMark = expression.calculate(firstArray);
         int secondMark = expression.calculate(secondArray);
 

@@ -1,5 +1,6 @@
 package mishamba.day4.service.task2;
 
+import com.mishamba.day4.exception.ProgramException;
 import com.mishamba.day4.service.task2.JaggedArrayService;
 import com.mishamba.day4.service.task2.SortOptions;
 import org.jetbrains.annotations.Contract;
@@ -42,8 +43,12 @@ public class JaggedArrayServiceTest {
     public void sort_sumStringElements(int[][] arrayToSort,
                                        int[][] expectedSortedArray) {
         JaggedArrayService service = new JaggedArrayService();
-        int[][] actualSortedArray = service.sort(arrayToSort, SortOptions::largerSum);
-        assertEquals(actualSortedArray, expectedSortedArray);
+        try {
+            int[][] actualSortedArray = service.sort(arrayToSort, SortOptions::largerSum);
+            assertEquals(actualSortedArray, expectedSortedArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 
     @Contract(value = " -> new", pure = true)
@@ -75,8 +80,12 @@ public class JaggedArrayServiceTest {
     public void sort_maxStringElement(int[][] arrayToSort,
                                   int[][] expectedSortedArray) {
         JaggedArrayService service = new JaggedArrayService();
-        int[][] actualSortedArray = service.sort(arrayToSort, SortOptions::maxElement);
-        assertEquals(actualSortedArray, expectedSortedArray);
+        try {
+            int[][] actualSortedArray = service.sort(arrayToSort, SortOptions::maxElement);
+            assertEquals(actualSortedArray, expectedSortedArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 
     @Contract(value = " -> new", pure = true)
@@ -111,7 +120,11 @@ public class JaggedArrayServiceTest {
     public void sort_minStringElement(int[][] arrayToSort,
                                       int[][] expectedSortedArray) {
         JaggedArrayService service = new JaggedArrayService();
-        int[][] actualSortedArray = service.sort(arrayToSort, SortOptions::minElement);
-        assertEquals(actualSortedArray, expectedSortedArray);
+        try {
+            int[][] actualSortedArray = service.sort(arrayToSort, SortOptions::minElement);
+            assertEquals(actualSortedArray, expectedSortedArray);
+        } catch (ProgramException ex) {
+            fail("got exception");
+        }
     }
 }

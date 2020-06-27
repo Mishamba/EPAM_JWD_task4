@@ -37,12 +37,15 @@ public class CustomArraySortServiceTest {
 
     @Test(dataProvider = "arraysToSort")
     public void sortByMergeSort(CustomArray arrayToSort,
-                                CustomArray providedSortedArray)
-            throws ProgramException {
+                                CustomArray providedSortedArray) {
         // TODO: 6/24/20  
         CustomArraySortService service = new CustomArraySortService();
-        CustomArray sortedArray = service.sortByMergeSort(arrayToSort);
-        assertEquals(sortedArray, providedSortedArray);
+        try {
+            CustomArray sortedArray = service.sortByMergeSort(arrayToSort);
+            assertEquals(sortedArray, providedSortedArray);
+        } catch(ProgramException ex) {
+            fail("got exception");
+        }
     }
 
     @Test(dataProvider = "arraysToSort")
